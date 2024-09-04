@@ -26,7 +26,7 @@ Alternatively, you can use the IPYTHON kernel. I prefer notebook. To anyone read
 
 The first way is slower as it requires function call while the second one does not.
 
-Now, let take it up a notch and try to populate the list
+Now, let's take it up a notch and try to populate the list
 
 ```py
 %%timeit -n 50 -r 50
@@ -45,7 +45,7 @@ l = [i for i in range(10)]
 l = [*range(10)]
 ```
 
-The first way is slowest as it requires method call `append` while the second one does not (not sure about the detail of its implementation tho). The way method is fastest as it does not even require for loop.
+The first way is slowest as it requires method call `append` while the second one does not (not sure about the detail of its implementation tho). The third method is fastest as it does not even require for loop.
 
 `PS: This should be replicated for tuple and dictionary as well`
 
