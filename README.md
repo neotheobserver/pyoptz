@@ -13,6 +13,8 @@ Alternatively, you can use the IPYTHON kernel. I prefer notebook. To anyone read
 # Table of Contents
 
 - [List in Python](#list-in-python)
+- [Counter](#counter)
+- [Enumerate and Zip](#enumerate-and-zip)
 - [Note](#note)
 
 ## List in Python
@@ -60,6 +62,58 @@ print(sys.getsizeof(l))
 ```
 
 The second way is uses less memory. This is apparently due to the way list is created. In the first way each integer is added to the list one by one which has different implementation (one that uses more memory) than the second way which creates list at a single go.
+
+## Counter
+
+Counter is one of the class from built in `collections` module of python. It is used to count the occurence of each elements in the list.
+
+```py
+%%timeit -n 500 -r 500
+from collections import Counter
+a_list = ['b' ,'a', 'c' , 'd','a', 'a', 'b']
+alphabet_counts = Counter(a_list)
+```
+
+`Alternatively,`
+
+```py
+%%timeit -n 500 -r 500
+a_list = ['a' ,'b', 'c' , 'd', 'a', 'b', 'a']
+alphabet_counts = {}
+for alphabet in a_list:
+    if alphabet in alphabet_counts:
+        alphabet_counts[alphabet] += 1
+    else:
+         alphabet_counts[alphabet] = 1
+```
+
+The above code does the same thing as counter does. But it is not succint in nature. However, suprisingly, it is faster than Counter class.
+
+`Note: Counter does return dictionary by sorting values in descending order which might explain it taking more time.`
+
+## Enumerate and Zip
+
+Both the code below combine lists with each same indexed item member of a single tuple.
+
+`Enumarate` is used to iterate over the iterables and return the index as well as the value.
+
+```py
+%%timeit -n 500 -r 500
+first_list = ['Apple', 'Orange', 'Mango']
+second_list = ['Okay', 'Good', 'Awesome']
+combined_list = [(item,second_list[i]) for i,item in enumerate(first_list)]
+```
+
+`Zip` is used to combine multiple iterables together
+
+```py
+%%timeit -n 500 -r 500
+first_list = ['Apple', 'Orange', 'Mango']
+second_list = ['Okay', 'Good', 'Awesome']
+combined_list = [*zip(first_list,second_list)]
+```
+
+The zip method is almost twice faster than enumerate way of doing the same thing.
 
 ## Note
 
